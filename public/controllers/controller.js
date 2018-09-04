@@ -1,16 +1,10 @@
-app.controller("appController" , ["$scope",function($scope){
-	$scope.list = [
-		{
-			"ID":1,
-			"Todo": "Wash Clothes",
-			"Status":"Pending"
-		},
-		{
-			"ID":2,
-			"Todo": "Study",
-			"Status":"Pending"
-		},
-	]
-}]);
+app.controller("appController" , ["$scope", "$http", function (state, http){
+	http.get('https://jsonplaceholder.typicode.com/todos')
+	.then(response => response.data)
+	.then(json => state.list = json)
+}])
+
+
+
 
 

@@ -17,7 +17,7 @@
 <div class="container mt-3">
 	<div class="col-md-12 col-lg-12 box-wrapper">
 		<ul class="list-group">
-			<li class="list-group-item mt-1 mb-1" ng-repeat="item in list | filter:{Todo: searchval,Status:'Pending' }">{{ item.Todo }}</li>
+			<li class="list-group-item mt-1 mb-1" ng-repeat="item in list | filter:{title: searchval,completed:false }">{{ item.title }}</li>
 		</ul>
 	</div>
 </div>
