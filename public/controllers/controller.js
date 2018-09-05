@@ -1,24 +1,19 @@
 app.controller("appController" , ["$scope", "$http", function (state, http){
 
+	state.sources = []
 	state.category = ['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology']
-	state.initialVal = ``
-	state.initialCategory = `general`
-	state.handleSearch = function(){
-		state.initialVal = state.searchval
-		state.initialVal2 = state.initialVal ? `search result for ${state.initialVal}...` : ''
-		fetching()
-	}
+	state.initialCategory = ``
+	state.numLimit = 10
 
-	state.handleClick = function(e){
-		state.initialCategory = e
-		fetching()
-	}
+	state.handleClickReadMore = () => state.numLimit + 5
+	state.handleClick = (e) => state.initialCategory = e
+	
+	console.log(state.numLimit)
+	
+	state.loader = "fetching data..."
 
-	const fetching = () => {
-		http.get(`https://newsapi.org/v2/top-headlines?q=${state.initialVal}&category=${state.initialCategory}&country=ph&apiKey=1d736559caa642f3bcc6076797b42e52`)
-		.then(response => response.data.articles)
-		.then(response => state.list = response)
-	}
-
-	fetching()
+	http.get('/api/readapi')
+		.then((res) => state.sources = res.data.sources)
+		.then((res) => state.loader = "")
+		.catch((err)=> console.log(err))
 }])

@@ -1,18 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-dark elegant-color-dark fixed-top">
     <div class="container">
-		<a class="navbar-brand" href="#">News App</a>
+		<a class="navbar-brand text-white" ng-click="handleClick('')">News App</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
 			aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="basicExampleNav">
-
         <ul class="navbar-nav mr-auto">
             <li ng-repeat="item in category" class="nav-item {{initialCategory === item ? active : null}}">
                 <a class="nav-link" ng-click="handleClick(item)">{{item}}</a>
             </li>
         </ul>
-
 			<form class="form-inline ml-auto" ng-submit="handleSearch()">
 				<div class="md-form my-0">
 					<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" ng-model="searchval">
@@ -24,24 +22,18 @@
 
 <section class="my-5 container">
   <h2 class="h1-responsive font-weight-bold text-center my-5 pt-3">Search worldwide news with code</h2>
-	<h3 class="font-weight-bold text-center">{{initialVal2}}</h3>  
+	<h3 class="font-weight-bold text-center">{{loader}}</h3>  
 	<p class="text-center text-large w-responsive mx-auto mb-5">Get breaking news headlines, and search for articles from over 30,000 news sources and blogs with our news API</p>
-	<div class="row m-2 border p-2 rounded" ng-repeat="item in list | filter:{title: searchval }">
-	  <div class="col-lg-5">
-		<div class="view overlay rounded z-depth-2 mb-lg-0 mb-4">
-		  <img class="img-fluid" src="{{item.urlToImage}}" alt="Sample image">
-		  <a>
-			<div class="mask rgba-white-slight"></div>
-		  </a>
-		</div>
-	  </div>
-	  <div class="col-lg-7">
-		<h3 class="font-weight-bold mb-3" ><strong>{{item.title}}</strong></h3>
-		<p>{{item.description}}</p>
-		<p>by <a><strong>{{item.author}}</strong></a>{{item.publishedAt.moment().format("MMM")}}</p>
-		<a class="btn elegant-color-dark text-white btn-md" href="{{item.url}}">Read more</a>
-	  </div>
-	</div>
+	<div class="m-2 border p-3 rounded" ng-repeat="source in sources | filter:{description: searchval} | filter:{category:initialCategory} | limitTo:numLimit">
+      <a href="#!" class="indigo-text"><h6 class="font-weight-bold mb-3"><i class="fa fa-suitcase pr-2"></i>{{source.category}}</h6></a>
+      <h3 class="font-weight-bold mb-3"><strong>{{source.name}}</strong></h3>
+      <p>{{source.description}}</p>
+      <p>by <a><strong class="mr-2">{{source.id}}</strong></a>{{source.country}}</p>
+      <a class="btn elegant-color-dark btn-md" href="{{source.url}}">Read more</a>
+  </div>
+  <div class="">
+    <a class="btn btn-block text-white elegant-color-dark btn-md" ng-click="handleClickReadMore()">Read more</a>
+  </div>
 	<hr class="my-5">
   </section>
 <footer class="page-footer font-small elegant-color-dark darken-3">
