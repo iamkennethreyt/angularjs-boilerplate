@@ -24,13 +24,41 @@
   <h2 class="h1-responsive font-weight-bold text-center my-5 pt-3">Search worldwide news with code</h2>
 	<h3 class="font-weight-bold text-center">{{loader}}</h3>  
 	<p class="text-center text-large w-responsive mx-auto mb-5">Get breaking news headlines, and search for articles from over 30,000 news sources and blogs with our news API</p>
-	<div class="m-2 border p-3 rounded" ng-repeat="source in sources | filter:{description: searchval} | filter:{category:initialCategory} | limitTo:numLimit">
-      <a href="#!" class="indigo-text"><h6 class="font-weight-bold mb-3"><i class="fa fa-suitcase pr-2"></i>{{source.category}}</h6></a>
-      <h3 class="font-weight-bold mb-3"><strong>{{source.name}}</strong></h3>
-      <p>{{source.description}}</p>
-      <p>by <a><strong class="mr-2">{{source.id}}</strong></a>{{source.country}}</p>
-      <a class="btn elegant-color-dark btn-md" href="{{source.url}}">Read more</a>
+  
+  <!-- Grid row -->
+  <div class="row m-2 border p-3 rounded" ng-repeat="article in articles | filter:{description: searchval} | limitTo:numLimit">
+
+    <!-- Grid column -->
+    <div class="col-lg-5">
+
+      <!-- Featured image -->
+      <div class="view overlay rounded z-depth-2 mb-lg-0 mb-4">
+        <img class="img-fluid" src="{{article.urlToImage}}" alt="Sample image">
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-lg-7">
+
+      <!-- Post title -->
+      <h3 class="font-weight-bold mb-3"><strong>{{article.title}}</strong></h3>
+      <!-- Excerpt -->
+      <p> {{article.description}}</p>
+      <!-- Post data -->
+      <p>by <a><strong>{{article.author}}</strong></a></p>
+      <!-- Read more button -->
+      <a class="btn elegant-color-dark btn-md" href="{{article.url}}">Read more</a>
+
+    </div>
+    <!-- Grid column -->
   </div>
+  <!-- Grid row -->
+
   <div class="">
     <a class="btn btn-block text-white elegant-color-dark btn-md" ng-click="handleClickReadMore()">Read more</a>
   </div>
